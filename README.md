@@ -7,4 +7,4 @@
 ![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)
 ![Pygame 2.x](https://img.shields.io/badge/pygame-2.x-yellow.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Last Commit](https://img.shields.io/github/last-commit/Dor-sketch/supream-miner)
+![Last Commit](https://img.shields.io/github/last-commit/Dor-sketch/supreme-miner)
