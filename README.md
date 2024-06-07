@@ -8,3 +8,7 @@
 ![Pygame 2.x](https://img.shields.io/badge/pygame-2.x-yellow.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Last Commit](https://img.shields.io/github/last-commit/Dor-sketch/supreme-miner)
+
+## Gameplay example
+
+https://github.com/Dor-sketch/supreme-miner/assets/138825033/cbe76fc3-abfd-46cc-98c0-d9220435fa38
