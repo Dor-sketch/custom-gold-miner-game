@@ -12,3 +12,5 @@
 ## Gameplay example
 
 https://github.com/Dor-sketch/supreme-miner/assets/138825033/cbe76fc3-abfd-46cc-98c0-d9220435fa38
+![alt text](image.png)
+![alt text](image.png)

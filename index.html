@@ -344,9 +344,11 @@ config = {
     <script src="https://pygame-web.github.io/archives/0.9//browserfs.min.js"></script>
 
 </head>
-
-<body>
-
+    <div id="top-scores">
+        <h2>Top Scores</h2>
+        <div id="scores"></div>
+        <button onclick="createGoldBubble()">Reload</button>
+    </div>
     <div id="transfer" align=center>
 <!--        <div class="spinner" id='spinner'></div> -->
         <div class="emscripten" id="status">Downloading...</div>
@@ -418,8 +420,188 @@ frameborder="1"
     <div id="pyconsole">
         <div id="terminal" tabIndex=1 align="left"></div>
     </div>
+    <html lang="en-us">
+<head>
+    <title>miriminer</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <link rel="icon" type="image/png" href="favicon.png" sizes="16x16">
+    <style>
+        body {
+            font-family: arial;
+            margin: 0;
+            padding: none;
+            background-color: powderblue;
+        }
+
+
+#top-scores h2 {
+    background: -webkit-linear-gradient(right, red, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#scores {
+    border: 2px solid gold;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#top-scores button {
+    background-color: gold;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+#top-scores button:hover {
+    background-color: white;
+    color: gold;
+    border: 2px solid gold;
+}
+    </style>
+<style>
+
+
+.bubble {
+    position: fixed;
+    bottom: 0;
+    background-color: gold;
+    border-radius: 50%;
+    animation-name: bubble;
+    animation-timing-function: linear;
+}
+
+@keyframes bubble {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100vh); }
+}
+</style>
+<script>
+function createGoldBubble() {
+    var bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.style.left = Math.random() * 100 + 'vw';
+    bubble.style.width = bubble.style.height = Math.random() * 100 + 'px';
+    bubble.style.animationDuration = Math.random() * 3 + 2 + 's';
+    document.body.appendChild(bubble);
+
+    setTimeout(function() {
+        bubble.remove();
+    }, 5000);
+}
+</script>
+</head>
+<body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getFirestore, collection, query, orderBy, limit, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDr3oTDvPzkzTBQhvwiQimaZ9iZl4ivTVI",
+            authDomain: "miri-miner.firebaseapp.com",
+            projectId: "miri-miner",
+            storageBucket: "miri-miner.appspot.com",
+            messagingSenderId: "727472014008",
+            appId: "1:727472014008:web:aefc3173c2625b1c3baa4d",
+            measurementId: "G-LQ3XPF6GMC"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function getTopScores() {
+            console.log("Hello World");
+
+            const q = query(collection(db, 'scores'), orderBy('score', 'desc'), limit(10));
+            const querySnapshot = await getDocs(q);
+
+            const topScores = querySnapshot.docs.map((doc, index) => {
+                return `${index + 1}. ${doc.data().player}: ${doc.data().score}`;
+            });
+            // store the top scores in local storage
+            localStorage.setItem('topScores', JSON.stringify(topScores));
+            return topScores;
+        }
+        getTopScores().then(topScores => {
+            console.log(topScores);
+            const scoresElement = document.getElementById('scores');
+            scoresElement.innerHTML = topScores.join('<br>');
+        }).catch(error => {
+            console.error('Error getting top scores: ', error);
+        });
+
+        async function saveScore(player, score) {
+            if (!player) {
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, 'scores'), {
+                    player: player,
+                    score: score
+                });
+                console.log('Score saved successfully');
+            } catch (error) {
+                console.error('Error saving score: ', error);
+            }
+        }
+        async function checkScore() {
+            let end = localStorage.getItem('end');
+            while (end === null || end === 'false') {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second
+                end = localStorage.getItem('end');
+            }
+            if (end === 'true') {
+                // set back to false to prevent multiple calls
+                localStorage.setItem('end', 'false');
+                let score = localStorage.getItem('score');
+                let player;
+                if (score !== null) {
+                    score = Number(score);
+                    if (score < 0) {
+                        // Once the score is negative, prompt the user for their name
+                        player = prompt('Enter your name if you want to save your terrible score:' + end);
+                    }
+                    if (score > 0) {
+                        // Once the score is positive, prompt the user for their name
+                        player = prompt('Nice score! Enter your name to save it:');
+                    }
+                    // Save the score to Firestore
+                    saveScore(player, score);
+                }
+            }
+        }
+        checkScore();
+    </script>
+
 
     <script type="application/javascript">
+
 
     async function custom_onload(debug_hidden) {
         // this is called before anything python is loaded
@@ -451,17 +633,21 @@ frameborder="1"
                     e.preventDefault();
             }
         }, false);
-
+                // Prompt the user for their name
+                // Prompt the user for their name
     }
 
-    function debug() {
-        // allow to gain access to dev tools from js console
-        // but only on desktop. difficult to reach when in iframe
-        python.config.debug = true
-        custom_onload(false)
-        Module.PyRun_SimpleString("shell.uptime()")
-        window_resize()
-    }
+
+
+function debug() {
+    // allow to gain access to dev tools from js console
+    // but only on desktop. difficult to reach when in iframe
+    python.config.debug = true
+    custom_onload(false)
+    Module.PyRun_SimpleString("shell.uptime()")
+
+    window_resize()
+}
 
     function info_inline(data){
         document.getElementById("info").innerHTML = data
