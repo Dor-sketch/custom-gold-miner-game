@@ -1,3 +1,5 @@
 .DS_Store
 /MiriMiner/__pycache__/
 /MiriMiner/build/
+/src/build/
+/src/__pycache__/
