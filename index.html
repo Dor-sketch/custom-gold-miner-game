@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="he" dir="rtl">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -14,7 +14,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiriMiner: Raiders of the Lost Ark by Dor</title>
+    <title>מירי מיינר ושודדי התיבה האבודה - שחקו בחינם</title>
     <meta name="description"
         content="Throw Miri's hook to collect the treasures and earn points while avoiding rocks!!">
     <meta name="keywords"
@@ -22,7 +22,7 @@
     <meta name="author" content="Dor Pascal">
     <meta name="robots" content="index, follow">
     <meta name="revisit-after" content="3 months">
-    <meta name="language" content="en_US">
+    <meta name="language" content="he">
     <meta name="generator" content="Visual Studio Code">
     <meta name="distribution" content="global">
     <meta name="rating" content="general">
@@ -39,18 +39,20 @@
     <meta property="og:image" content="https://dorpascal.com/custom-gold-miner-game/images/miriminer.gif">
 
     <meta name="theme-color" content="#3f2832">
-    <link rel="icon" href="https://img.itch.zone/aW1nLzE2NTI1MjM3LnBuZw==/32x32%23/2iSy7o.png" type="image/png">
-    <link href="https://static.itch.io/game.css?1720118245" rel="stylesheet">
-    <link href="https://static.itch.io/redactor.css" rel="stylesheet">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="canonical" href="https://dorpascal.com/custom-gold-miner-game/">
     <style>
+    :root {
+        --primary-color: #3f2832;
+        --secondary-color:#ffe762;
+    }
         body {
             font-family: Arial, sans-serif;
-            background-color: #3f2832;
-            color: #ffe762;
+            background-color: var(--primary-color);
+            color:var(--secondary-color);
             margin: 0;
             padding: 0;
             width: 100%;
-
         }
 
         .wrapper {
@@ -74,6 +76,7 @@
             font-size: 2.5em;
             margin-bottom: 0;
         }
+
         .instructions {
             background-color: rgba(63, 40, 50, 0.85);
             padding: 4px;
@@ -81,7 +84,7 @@
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-            max-width: 600px; /* Adjust this value to control the maximum width */
+            max-width: 600px;
         }
 
         .instructions h2 {
@@ -102,13 +105,17 @@
 
         .gallery img {
             width: 48%;
-            /* border: 2px solid #694957; */
         }
-
         .footer {
             text-align: center;
             margin-top: 20px;
             font-size: 0.9em;
+            position: fixed; /* or 'fixed' depending on the desired behavior */
+            bottom: 0;
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: var(--primary-color) ;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optional: adds shadow at the top */
         }
 
         #top-scores h2 {
@@ -118,13 +125,13 @@
             font-size: 2em;
             margin-bottom: 20px;
         }
+
         #scores {
             color: #3f2832;
             border: 2px solid gold;
             padding: 20px;
             background-color: #f9f9f9;
             min-height: 200px;
-            /* Removed flex display properties */
         }
 
         #scores:empty::before {
@@ -134,7 +141,7 @@
 
         #top-scores button {
             background-color: gold;
-            color: white;
+            color: #3f2832;
             border: none;
             padding: 10px 20px;
             text-align: center;
@@ -161,6 +168,39 @@
             animation-timing-function: linear;
         }
 
+        .langSwitch {
+        background-color: rgb(63, 40, 50);
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .langSwitch:hover {
+            background-color: #e0e0e0;
+        }
+
+        .flag-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .flag-container svg {
+            margin-right: 8px;
+        }
+
+        #heFlag {
+            display: none;
+        }
+
+        #enFlag, #heFlag {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+
         @keyframes bubble {
             0% {
                 transform: translateY(0);
@@ -172,7 +212,7 @@
         }
 
         .container iframe {
-            width: calc(100vw - 40px); /* Adjusted width */
+            width: calc(100vw - 40px);
             max-width: 900px;
             aspect-ratio: 9 / 6;
         }
@@ -183,11 +223,92 @@
             gap: 20px;
             justify-content: center;
         }
+.icon-link {
+    text-decoration: none; /* Removes the underline from only the specified anchor tags */
+}
+        .footer > a {
+        color: var(--primary-color) !important;
+        }
+        .langSwitch {
+            border: 1px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+            display: inline-flex; /* Use flexbox for alignment */
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            transition: background-color 0.3s; /* Smooth background color change on hover */
+            font-size: 1.2em; /* Larger text */
+            left: 0;
+            position: absolute; /* Position the button absolutely */
+        }
+
+        .langSwitch:hover {
+            background-color: #e0e0e0; /* Slightly darker grey on hover */
+        }
+
+        .flag-container {
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Center flags vertically */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .flag-container svg {
+            margin-right: 0; /* Remove space between flag and text */
+        }
+
+        /* Specific styles for the flags to ensure they are visible and properly sized */
+        #enFlag, #heFlag {
+            width: 36px; /* Increased width of the flags */
+            height: 36px; /* Increased height of the flags */
+            vertical-align: middle; /* Align flags to the middle of the text if any */
+        }
+
+        .langSwitch:hover {
+            background-color: #fcd34d; /* Lighter yellow */
+            border-color: #fbbf24; /* Golden */
+        }
+
+        .flag-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .flag {
+            width: 40px; /* Adjusted width */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 0; /* Remove space between flags */
+        }
+
+        /* Ensure the last flag does not have a right margin */
+        .flag:last-child {
+            margin-right: 0;
+        }
     </style>
 </head>
 
 <body>
-
+   <button class="langSwitch" id="langSwitch" aria-label="Switch Language">
+        <div class="flag-container">
+            <!-- English Flag SVG remains unchanged -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 30" width="50" height="30" id="enFlag" class="flag">
+	<clipPath id="t">
+		<path d="M25,15h25v15zv15h-25zh-25v-15zv-15h25z"/>
+	</clipPath>
+	<path d="M0,0v30h50v-30z" fill="#012169"/>
+	<path d="M0,0 50,30M50,0 0,30" stroke="#fff" stroke-width="6"/>
+	<path d="M0,0 50,30M50,0 0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
+	<path d="M-1 11h22v-12h8v12h22v8h-22v12h-8v-12h-22z" fill="#C8102E" stroke="#FFF" stroke-width="2"/>
+</svg>
+            <!-- Updated Hebrew Flag SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" id="heFlag" class="flag" style="display:none;">
+                <path d="M 0,0 H 1100 V 800 H 0 Z" fill="#fff"/>
+                <path d="M 0,75 H 1100 V 200 H 0 Z" fill="#0038b8"/>
+                <path d="M 0,600 H 1100 V 725 H 0 Z" fill="#0038b8"/>
+                <path d="M 423.81566,472.85253 H 676.18435 L 550.00001,254.29492 Z m 126.18435,72.85255 126.1843,-218.55765 H 423.81566 Z" fill="none" stroke="#0038b8" stroke-width="27.5"/>
+            </svg>
+        </div>
+    </button>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -240,6 +361,7 @@
         }).catch(error => {
             console.error('Error getting top scores: ', error);
         });
+
         async function saveScore(player, score) {
             if (!player) {
                 return;
@@ -255,6 +377,7 @@
                 console.error('Error saving score: ', error);
             }
         }
+
         async function checkScore() {
             let end = localStorage.getItem('end');
             while (end === null || end === 'false') {
@@ -286,56 +409,68 @@
 
     <div class="wrapper">
         <header>
-            <h1>MiriMiner: Raiders of the Lost Ark</h1>
+            <h1 id="gameTitle"></h1>
         </header>
-        <div class="container">
-            <iframe src="game.html" frameborder="0"></iframe>
+        <div class="container" id="gameContainer">
         </div>
         <div class="instructions_and_topscores">
         <div class="instructions">
-            <h1>MiriMiner: Raiders of the Lost Ark</h1>
-            <p>An implementation of the classic Gold Miner game using Python and Pygame.
-            </p>
-            <p>Features include:<br></p>
+            <h1 id="gameTitleDuplicate"></h1>
+            <p id="gameDescription"></p>
+            <p id="featuresIntro"></p>
             <ul>
-                <li>Real-time game dynamics with gold and rock objects to be mined.</li>
-                <li>Dynamic background and object image loading.</li>
-                <li>Interactive gameplay with swinging and retracting mechanisms.</li>
-                <li>Scorekeeping and object interaction (grabbing and
-                    carrying).<strong></strong><strong></strong><strong><br></strong></li>
+                <li id="feature1"></li>
+                <li id="feature2"></li>
+                <li id="feature3"></li>
+                <li id="feature4"></li>
             </ul>
-            <h2>Instructions</h2>
-            <p>Throw Miri's hook to collect the treasures and earn points while avoiding rocks!!</p>
-            <blockquote>
-                <strong>iPhone Users:</strong>&nbsp;When the screen finishes loading and you see the message "Ready to
-                start!", tap on the lighter grey areas (either above or below the darker area in the center of the
-                screen) to begin.
-            </blockquote>
+            <h2 id="instructionsTitle"></h2>
+            <p id="instructionsText"></p>
+            <blockquote id="iphoneUsers"></blockquote>
         </div>
         <div id="top-scores">
-            <h2>Top Scores</h2>
+            <h2 id="top-scores-title"></h2>
             <div id="scores"></div>
             <button onclick="createGoldBubble()">Reload</button>
         </div>
         </div>
-        <div class="links">
-            <h2>Miriminer also available on the leading game platform:</h2>
-            <iframe frameborder="0" src="https://itch.io/embed/2759175?dark=true" width = "100%" height="167"><a
-                    href="https://dor-sketch.itch.io/miriminer">MiriMiner: Raiders of the Lost Ark by Dor</a></iframe>
-        </div>
         <div class="gallery">
-            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAzNi5wbmc=/original/y4VS5r.png"
-                alt="Screenshot 1">
-            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAyNS5wbmc=/original/%2BgIWyj.png"
-                alt="Screenshot 2">
-            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAxOC5wbmc=/original/QE25Tg.png"
-                alt="Screenshot 3">
-            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTA2Mi5wbmc=/original/7Zf0UF.png"
-                alt="Screenshot 4">
+        <details>
+            <summary>Click to view screenshots</summary>
+            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAzNi5wbmc=/original/y4VS5r.png" alt="Screenshot 1" loading="lazy">
+            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAyNS5wbmc=/original/%2BgIWyj.png" alt="Screenshot 2" loading="lazy">
+            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAxOC5wbmc=/original/QE25Tg.png" alt="Screenshot 3" loading="lazy">
+            <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTA2Mi5wbmc=/original/7Zf0UF.png" alt="Screenshot 4" loading="lazy">
+        </details>
         </div>
-        <div class="footer">
-            &copy; 2024 MiriMiner. All rights reserved. | <a href="https://dorpascal.com"> dorpascal.com</a>
+        <div class="footer" direction="ltr !important">
+            <p>Created by <a style="color: var(--primary-color) !important;" href="https://dorpascal.com">Dor Pascal</a> and licensed under MIT License</p>
+        <a href="https://www.github.com/Dor-sketch/custom-gold-miner-game" aria-label="Dor Pascal on GitHub" style="color: var(--primary-color) !important; text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" width="24" height="24" aria-hidden="true"
+                focusable="false" class="fab fa-github">
+                <path
+                    d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                </path>
+            </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/dor-pascal/" aria-label="Dor Pascal on LinkedIn" style="color: var(--primary-color) !important; text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" aria-hidden="true"
+                focusable="false" class="fab fa-linkedin">
+                <path
+                    d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V209h66.5v207zM102.2 181.7H102c-21.5 0-35.3-14.8-35.3-33.3 0-19 14.6-33.4 36.9-33.4 22.3 0 35.3 14.4 35.5 33.4 .1 18.5-14 33.3-36.9 33.3zm245.2 234.3h-66.4V305c0-24.7-8.8-41.6-30.9-41.6-16.8 0-26.8 11.3-31.3 22.3-1.6 3.9-2 9.4-2 14.9v98.4h-66.4c.9-101.7 0-207.6 0-207.6h66.4v29.4c8.8-13.5 24.6-32.7 60-32.7 43.8 0 76.8 28.8 76.8 90.5v120.4z">
+                </path>
+            </svg>
+        </a>
+        <a href="https://dor-sketch.itch.io/miriminer" aria-label="Dor Pascal's Games on Itch.io" style="color: var(--primary-color) !important; text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" aria-hidden="true"
+                focusable="false" class="fas fa-gamepad">
+                <path
+                    d="M71.9 34.8C50.2 47.7 7.4 96.8 7 109.7v21.3c0 27.1 25.3 50.8 48.3 50.8 27.6 0 50.5-22.9 50.5-50 0 27.1 22.2 50 49.8 50s49-22.9 49-50c0 27.1 23.6 50 51.2 50h.5c27.6 0 51.2-22.9 51.2-50 0 27.1 21.5 50 49 50s49.8-22.9 49.8-50c0 27.1 23 50 50.5 50 23 0 48.3-23.8 48.3-50.8v-21.3c-.4-12.9-43.2-62.1-64.9-75C372.6 32.4 325.8 32 256 32S91.1 33.1 71.9 34.8zm132.3 134.4c-22 38.4-77.9 38.7-99.9 .3-13.2 23.1-43.2 32.1-56 27.7-3.9 40.2-13.7 237.1 17.7 269.2 80 18.7 302.1 18.1 379.8 0 31.7-32.3 21.3-232 17.8-269.2-12.9 4.4-42.9-4.6-56-27.7-22 38.5-77.9 38.1-99.9-.2-7.1 12.5-23.1 28.9-51.8 28.9a57.5 57.5 0 0 1 -51.8-28.9zm-41.6 53.8c16.5 0 31.1 0 49.2 19.8a436.9 436.9 0 0 1 88.2 0C318.2 223 332.9 223 349.3 223c52.3 0 65.2 77.5 83.9 144.5 17.3 62.2-5.5 63.7-34 63.7-42.2-1.6-65.5-32.2-65.5-62.8-39.3 6.4-101.9 8.8-155.6 0 0 30.6-23.3 61.2-65.5 62.8-28.4-.1-51.2-1.6-33.9-63.7 18.7-67 31.6-144.5 83.9-144.5zM256 270.8s-44.4 40.8-52.4 55.2l29-1.2v25.3c0 1.6 21.3 .2 23.3 .2 11.7 .5 23.3 1 23.3-.2v-25.3l29 1.2c-8-14.5-52.4-55.2-52.4-55.2z">
+                </path>
+            </svg>
+        </a>
         </div>
+
     </div>
 
     <script>
@@ -348,9 +483,11 @@
             document.body.appendChild(bubble);
 
             setTimeout(function () {
+                bubble
                 bubble.remove();
             }, 5000);
         }
+
         async function getTopScores() {
             const q = query(collection(db, 'scores'), orderBy('score', 'desc'), limit(10));
             const querySnapshot = await getDocs(q);
@@ -413,22 +550,95 @@
         });
     </script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, query, orderBy, limit, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDr3oTDvPzkzTBQhvwiQimaZ9iZl4ivTVI",
-            authDomain: "miri-miner.firebaseapp.com",
-            projectId: "miri-miner",
-            storageBucket: "miri-miner.appspot.com",
-            messagingSenderId: "727472014008",
-            appId: "1:727472014008:web:aefc3173c2625b1c3baa4d",
-            measurementId: "G-LQ3XPF6GMC"
+    <script>
+        const langData = {
+            'top-scores-title': {
+                'en': 'Top Scores',
+                'he': 'תוצאות מובילות'
+            },
+            "gameTitle": {
+                "en": "MiriMiner: Raiders of the Lost Ark",
+                "he": "מירימיינר: שודדי התיבה האבודה"
+            },
+            "gameTitleDuplicate": {
+                "en": "MiriMiner: Raiders of the Lost Ark",
+                "he": "מירימיינר: שודדי התיבה האבודה"
+            },
+            "gameDescription": {
+                "en": "An implementation of the classic Gold Miner game using Python and Pygame.",
+                "he": "מימוש של המשחק הקלאסי כורה הזהב באמצעות Python ו-Pygame."
+            },
+            "featuresIntro": {
+                "en": "Features include:",
+                "he": "התכונות כוללות:"
+            },
+            "feature1": {
+                "en": "Real-time game dynamics with gold and rock objects to be mined.",
+                "he": "דינמיקת משחק בזמן אמת עם עצמים של זהב וסלעים לכרייה."
+            },
+            "feature2": {
+                "en": "Dynamic background and object image loading.",
+                "he": "טעינת רקע ותמונות עצמים דינמיות."
+            },
+            "feature3": {
+                "en": "Interactive gameplay with swinging and retracting mechanisms.",
+                "he": "משחק אינטראקטיבי עם מנגנוני נדנוד ומשיכה."
+            },
+            "feature4": {
+                "en": "Scorekeeping and object interaction (grabbing and carrying).",
+                "he": "שמירת ניקוד ואינטראקציה עם עצמים (תפיסה ונשיאה)."
+            },
+            "instructionsTitle": {
+                "en": "Instructions",
+                "he": "הוראות"
+            },
+            "instructionsText": {
+                "en": "Throw Miri's hook to collect the treasures and earn points while avoiding rocks!!",
+                "he": "זרוק את וו השליכה של מירי כדי לאסוף את האוצרות ולצבור נקודות תוך כדי הימנעות מסלעים!!"
+            },
+            "iphoneUsers": {
+                "en": "iPhone Users: When the screen finishes loading and you see the message \"Ready to start!\", tap on the lighter grey areas (either above or below the darker area in the center of the screen) to begin.",
+                "he": "משתמשי iPhone: כאשר המסך מסיים להיטען ואתה רואה את ההודעה \"מוכן להתחיל!\", הקש על אזורי האפור הבהירים (מעל או מתחת לאזור הכהה יותר במרכז המסך) כדי להתחיל."
+            }
         };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        function toggleLanguage(lang) {
+            for (const id in langData) {
+                if (langData.hasOwnProperty(id)) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.innerText = langData[id][lang];
+                    }
+                }
+            }
+            document.dir = lang === 'he' ? 'rtl' : 'ltr';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameContainer = document.getElementById('gameContainer');
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://dorpascal.com/custom-gold-miner-game/game.html';
+            iframe.frameBorder = 0;
+            iframe.title = 'MiriMiner: Raiders of the Lost Ark by Dor';
+            gameContainer.appendChild(iframe);
+            const lang = document.documentElement.lang;
+            toggleLanguage(lang);
+        });
+
+        document.getElementById('langSwitch').addEventListener('click', () => {
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'he' ? 'en' : 'he';
+            document.documentElement.lang = newLang;
+            document.getElementById('enFlag').style.display = newLang === 'he' ? 'block' : 'none';
+            document.getElementById('heFlag').style.display = newLang === 'he' ? 'none' : 'block';
+            // move the button to the right side of the screen if the language is changed to English (ltr) and vice versa
+            document.getElementById('langSwitch').style.left = newLang === 'he' ? '0' : 'auto';
+            document.getElementById('langSwitch').style.right = newLang === 'he' ? 'auto' : '0';
+            // change background color of the button based on the language
+            document.getElementById('langSwitch').style.backgroundColor = newLang === 'he' ? '#3f2832' : 'rgb(2,36,104)';
+
+            toggleLanguage(newLang);
+        });
     </script>
 </body>
 
