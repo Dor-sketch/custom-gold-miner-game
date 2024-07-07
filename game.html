@@ -580,8 +580,6 @@ asyncio.run( custom_site() )
         }
         getTopScores().then(topScores => {
             console.log(topScores);
-            const scoresElement = document.getElementById('scores');
-            scoresElement.innerHTML = topScores.join('<br>');
         }).catch(error => {
             console.error('Error getting top scores: ', error);
         });
