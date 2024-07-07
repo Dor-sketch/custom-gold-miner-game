@@ -16,9 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מירי מיינר ושודדי התיבה האבודה - שחקו בחינם</title>
     <meta name="description"
-        content="Throw Miri's hook to collect the treasures and earn points while avoiding rocks!!">
+        content="A custom Gold Miner game featuring Miri Miner. Implemnted in Python using Pygame. Created by Dor Pascal. Source code available on GitHub. Play now for free.">
     <meta name="keywords"
-        content="gold miner, game, MiriMiner, Raiders of the Lost Ark, Dor Pascal, מירי רגב, בנימין נתניהו, משחק, כור הזהב">
+        content="gold miner, game, miri regev, Pygame, pygpag, pygame, Dor Pascal, מירי רגב, בנימין נתניהו, משחק, כור הזהב">
     <meta name="author" content="Dor Pascal">
     <meta name="robots" content="index, follow">
     <meta name="revisit-after" content="3 months">
@@ -38,7 +38,7 @@
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:image" content="https://dorpascal.com/custom-gold-miner-game/images/miriminer.gif">
 
-    <meta name="theme-color" content="#3f2832">
+    <meta name="theme-color" content="#ffe762">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="canonical" href="https://dorpascal.com/custom-gold-miner-game/">
     <style>
@@ -63,18 +63,19 @@
             flex-direction: column;
             align-items: center;
         }
-
         header {
             text-align: center;
+            margin-top: 0;
             margin-bottom: 20px;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, readable font */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Subtle shadow for depth */
         }
-
         header h1 {
             background: -webkit-linear-gradient(right, red, yellow);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 2.5em;
-            margin-bottom: 0;
+            font-size: 2em;
         }
 
         .instructions {
@@ -106,9 +107,12 @@
         .gallery img {
             width: 48%;
         }
-        .footer {
+        footer {
             text-align: center;
-            margin-top: 20px;
+            margin-left: 10px;
+                        margin-right: 10px;
+
+            padding-left: 10px;
             font-size: 0.9em;
             position: fixed; /* or 'fixed' depending on the desired behavior */
             bottom: 0;
@@ -116,6 +120,10 @@
             background-color: var(--secondary-color);
             color: var(--primary-color) ;
             box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optional: adds shadow at the top */
+        flex-direction: row;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
         }
 
         #top-scores h2 {
@@ -210,13 +218,12 @@
                 transform: translateY(-100vh);
             }
         }
-
         .container iframe {
             width: calc(100vw - 40px);
             max-width: 900px;
             aspect-ratio: 9 / 6;
+            overflow: hidden; /* This hides the overflow, but might not prevent scrolling within the iframe itself */
         }
-
         .instructions_and_topscores {
             display: flex;
             flex-wrap: wrap;
@@ -226,7 +233,7 @@
 .icon-link {
     text-decoration: none; /* Removes the underline from only the specified anchor tags */
 }
-        .footer > a {
+        footer > a {
         color: var(--primary-color) !important;
         }
         .langSwitch {
@@ -238,8 +245,7 @@
             justify-content: center; /* Center items horizontally */
             transition: background-color 0.3s; /* Smooth background color change on hover */
             font-size: 1.2em; /* Larger text */
-            left: 0;
-            position: absolute; /* Position the button absolutely */
+
         }
 
         .langSwitch:hover {
@@ -288,27 +294,7 @@
 </head>
 
 <body>
-   <button class="langSwitch" id="langSwitch" aria-label="Switch Language">
-        <div class="flag-container">
-            <!-- English Flag SVG remains unchanged -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 30" width="50" height="30" id="enFlag" class="flag">
-	<clipPath id="t">
-		<path d="M25,15h25v15zv15h-25zh-25v-15zv-15h25z"/>
-	</clipPath>
-	<path d="M0,0v30h50v-30z" fill="#012169"/>
-	<path d="M0,0 50,30M50,0 0,30" stroke="#fff" stroke-width="6"/>
-	<path d="M0,0 50,30M50,0 0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
-	<path d="M-1 11h22v-12h8v12h22v8h-22v12h-8v-12h-22z" fill="#C8102E" stroke="#FFF" stroke-width="2"/>
-</svg>
-            <!-- Updated Hebrew Flag SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" id="heFlag" class="flag" style="display:none;">
-                <path d="M 0,0 H 1100 V 800 H 0 Z" fill="#fff"/>
-                <path d="M 0,75 H 1100 V 200 H 0 Z" fill="#0038b8"/>
-                <path d="M 0,600 H 1100 V 725 H 0 Z" fill="#0038b8"/>
-                <path d="M 423.81566,472.85253 H 676.18435 L 550.00001,254.29492 Z m 126.18435,72.85255 126.1843,-218.55765 H 423.81566 Z" fill="none" stroke="#0038b8" stroke-width="27.5"/>
-            </svg>
-        </div>
-    </button>
+
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -415,7 +401,6 @@
         </div>
         <div class="instructions_and_topscores">
         <div class="instructions">
-            <h1 id="gameTitleDuplicate"></h1>
             <p id="gameDescription"></p>
             <p id="featuresIntro"></p>
             <ul>
@@ -443,8 +428,8 @@
             <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTA2Mi5wbmc=/original/7Zf0UF.png" alt="Screenshot 4" loading="lazy">
         </details>
         </div>
-        <div class="footer" direction="ltr !important">
-            <p>Created by <a style="color: var(--primary-color) !important;" href="https://dorpascal.com">Dor Pascal</a> and licensed under MIT License</p>
+        <footer>
+            <p>
         <a href="https://www.github.com/Dor-sketch/custom-gold-miner-game" aria-label="Dor Pascal on GitHub" style="color: var(--primary-color) !important; text-decoration: none;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" width="24" height="24" aria-hidden="true"
                 focusable="false" class="fab fa-github">
@@ -468,10 +453,30 @@
                     d="M71.9 34.8C50.2 47.7 7.4 96.8 7 109.7v21.3c0 27.1 25.3 50.8 48.3 50.8 27.6 0 50.5-22.9 50.5-50 0 27.1 22.2 50 49.8 50s49-22.9 49-50c0 27.1 23.6 50 51.2 50h.5c27.6 0 51.2-22.9 51.2-50 0 27.1 21.5 50 49 50s49.8-22.9 49.8-50c0 27.1 23 50 50.5 50 23 0 48.3-23.8 48.3-50.8v-21.3c-.4-12.9-43.2-62.1-64.9-75C372.6 32.4 325.8 32 256 32S91.1 33.1 71.9 34.8zm132.3 134.4c-22 38.4-77.9 38.7-99.9 .3-13.2 23.1-43.2 32.1-56 27.7-3.9 40.2-13.7 237.1 17.7 269.2 80 18.7 302.1 18.1 379.8 0 31.7-32.3 21.3-232 17.8-269.2-12.9 4.4-42.9-4.6-56-27.7-22 38.5-77.9 38.1-99.9-.2-7.1 12.5-23.1 28.9-51.8 28.9a57.5 57.5 0 0 1 -51.8-28.9zm-41.6 53.8c16.5 0 31.1 0 49.2 19.8a436.9 436.9 0 0 1 88.2 0C318.2 223 332.9 223 349.3 223c52.3 0 65.2 77.5 83.9 144.5 17.3 62.2-5.5 63.7-34 63.7-42.2-1.6-65.5-32.2-65.5-62.8-39.3 6.4-101.9 8.8-155.6 0 0 30.6-23.3 61.2-65.5 62.8-28.4-.1-51.2-1.6-33.9-63.7 18.7-67 31.6-144.5 83.9-144.5zM256 270.8s-44.4 40.8-52.4 55.2l29-1.2v25.3c0 1.6 21.3 .2 23.3 .2 11.7 .5 23.3 1 23.3-.2v-25.3l29 1.2c-8-14.5-52.4-55.2-52.4-55.2z">
                 </path>
             </svg>
-        </a>
+        </a>Created by <a style="color: var(--primary-color) !important;" href="https://dorpascal.com">Dor Pascal</a> and licensed under MIT License
+        </p>
+ <button class="langSwitch" id="langSwitch" aria-label="Switch Language">
+        <div class="flag-container">
+            <!-- English Flag SVG remains unchanged -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 30" width="50" height="30" id="enFlag" class="flag">
+	<clipPath id="t">
+		<path d="M25,15h25v15zv15h-25zh-25v-15zv-15h25z"/>
+	</clipPath>
+	<path d="M0,0v30h50v-30z" fill="#012169"/>
+	<path d="M0,0 50,30M50,0 0,30" stroke="#fff" stroke-width="6"/>
+	<path d="M0,0 50,30M50,0 0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
+	<path d="M-1 11h22v-12h8v12h22v8h-22v12h-8v-12h-22z" fill="#C8102E" stroke="#FFF" stroke-width="2"/>
+</svg>
+            <!-- Updated Hebrew Flag SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" id="heFlag" class="flag" style="display:none;">
+                <path d="M 0,0 H 1100 V 800 H 0 Z" fill="#fff"/>
+                <path d="M 0,75 H 1100 V 200 H 0 Z" fill="#0038b8"/>
+                <path d="M 0,600 H 1100 V 725 H 0 Z" fill="#0038b8"/>
+                <path d="M 423.81566,472.85253 H 676.18435 L 550.00001,254.29492 Z m 126.18435,72.85255 126.1843,-218.55765 H 423.81566 Z" fill="none" stroke="#0038b8" stroke-width="27.5"/>
+            </svg>
         </div>
-
-    </div>
+    </button>
+    </footer>
 
     <script>
         function createGoldBubble() {
@@ -619,10 +624,15 @@
             const iframe = document.createElement('iframe');
             iframe.src = 'https://dorpascal.com/custom-gold-miner-game/game.html';
             iframe.frameBorder = 0;
+            iframe.allowFullscreen = true;
+            iframe.scrolling = 'no';
             iframe.title = 'MiriMiner: Raiders of the Lost Ark by Dor';
             gameContainer.appendChild(iframe);
             const lang = document.documentElement.lang;
             toggleLanguage(lang);
+            const footer = document.querySelector('footer');
+            footer.style.textAlign = 'left';
+            footer.style.direction = 'ltr';
         });
 
         document.getElementById('langSwitch').addEventListener('click', () => {
@@ -632,8 +642,8 @@
             document.getElementById('enFlag').style.display = newLang === 'he' ? 'block' : 'none';
             document.getElementById('heFlag').style.display = newLang === 'he' ? 'none' : 'block';
             // move the button to the right side of the screen if the language is changed to English (ltr) and vice versa
-            document.getElementById('langSwitch').style.left = newLang === 'he' ? '0' : 'auto';
-            document.getElementById('langSwitch').style.right = newLang === 'he' ? 'auto' : '0';
+            // document.getElementById('langSwitch').style.left = newLang === 'he' ? '0' : 'auto';
+            // document.getElementById('langSwitch').style.right = newLang === 'he' ? 'auto' : '0';
             // change background color of the button based on the language
             document.getElementById('langSwitch').style.backgroundColor = newLang === 'he' ? '#3f2832' : 'rgb(2,36,104)';
 
