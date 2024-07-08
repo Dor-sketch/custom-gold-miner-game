@@ -53,26 +53,31 @@
             margin: 0;
             padding: 0;
             width: 100%;
+            margin-bottom: 30px;
         }
 
-        .wrapper {
+        main {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
         header {
             text-align: center;
-            margin-top: 0;
-            margin-bottom: 20px;
             width: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, readable font */
             box-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Subtle shadow for depth */
+            top:0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        header h1 {
+        h1 {
             background: -webkit-linear-gradient(right, red, yellow);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 2em;
+            text-align: center;
         }
 
         .instructions {
@@ -106,10 +111,6 @@
         }
         footer {
             text-align: center;
-            margin-left: 10px;
-                        margin-right: 10px;
-
-            padding-left: 10px;
             font-size: 0.9em;
             position: fixed; /* or 'fixed' depending on the desired behavior */
             bottom: 0;
@@ -121,6 +122,7 @@
   display: flex;
   align-content: center;
   justify-content: space-between;
+  direction: ltr !important;
         }
 
         #top-scores h2 {
@@ -182,7 +184,7 @@
                 transform: translateY(-100vh);
             }
         }
-        .container iframe {
+        .container iframe, .container {
             width: calc(100vw - 40px);
             max-width: 900px;
             aspect-ratio: 9 / 6;
@@ -211,7 +213,6 @@
             margin: 10px;
             background-color: var(--primary-color); /* Dark background color */
             margin: 0;
-            margin-right: 6px;
         }
         .langSwitch svg {
         border-radius: 50%; /* Make the flag circular */
@@ -238,10 +239,23 @@
   align-content: center;
   align-items: center;
   margin-block-end: 0;
-    margin: 0;
+    margin: 0.1em;
+    margin-bottom: 0;
 }
 
+@media screen and (max-width: 600px) {
+h1, h2 {
+    font-size: 1.4em;
+}
+main {
+margin-left: 40px;
+margin-right: 40px;
+}
 
+#top-scores h2 {
+font-size: 1em;
+}
+}
     </style>
 </head>
 
@@ -345,28 +359,28 @@
         checkScore();
     </script>
 
-    <div class="wrapper">
         <header>
-            <h1 id="gameTitle"></h1>
+            <h1 id="gameTitle">מירי מיינר ושודדי התיבה האבודה</h1>
         </header>
+    <main>
         <div class="container" id="gameContainer">
         </div>
         <div class="instructions_and_topscores">
         <div class="instructions">
-            <p id="gameDescription"></p>
-            <p id="featuresIntro"></p>
+            <p id="gameDescription">מימוש של המשחק הקלאסי כורה הזהב באמצעות Python ו-Pygame.</p>
+            <p id="featuresIntro">התכונות כוללות:</p>
             <ul>
-                <li id="feature1"></li>
-                <li id="feature2"></li>
-                <li id="feature3"></li>
-                <li id="feature4"></li>
+                <li id="feature1">דינמיקת משחק בזמן אמת עם תנועה חלקה</li>
+                <li id="feature2">פיזיקה מתקדמת עם תנועה וקריסה של אבנים</li>
+                <li id="feature3">משחק אינטרקטיבי עם שלבים דינמיים</li>
+                <li id="feature4">פיצ'רים נוספים כגון ניקוד ושמירת תוצאות</li>
             </ul>
-            <h2 id="instructionsTitle"></h2>
-            <p id="instructionsText"></p>
-            <blockquote id="iphoneUsers"></blockquote>
+            <h2 id="instructionsTitle">הוראות משחק:</h2>
+            <p id="instructionsText">השתמשו בחצים כדי לזוז את הכף של מירי ולאסוף את האוצרות. הימנעו מהאבנים כדי לא לאבד נקודות.</p>
+            <blockquote id="iphoneUsers">משתמשי iPhone: ניתן לשחק על ידי לחיצה על הכפתור השחור בתחתית המסך.</blockquote>
         </div>
         <div id="top-scores">
-            <h2 id="top-scores-title"></h2>
+            <h2 id="top-scores-title">טבלת ניקוד: תוצאות מובילות</h2>
             <div id="scores"></div>
             <button onclick="createGoldBubble()">Reload</button>
         </div>
@@ -379,7 +393,7 @@
             <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAxOC5wbmc=/original/QE25Tg.png" alt="Screenshot 3" loading="lazy">
             <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTA2Mi5wbmc=/original/7Zf0UF.png" alt="Screenshot 4" loading="lazy">
         </details>
-        </div>
+        </main>
         <footer>
             <p>
         <a href="https://www.github.com/Dor-sketch/custom-gold-miner-game" aria-label="Dor Pascal on GitHub" style="color: var(--primary-color) !important; text-decoration: none;">
@@ -575,17 +589,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             const gameContainer = document.getElementById('gameContainer');
             const iframe = document.createElement('iframe');
-            iframe.src = '/game.html';
+            iframe.src = 'https://dorpascal.com/custom-gold-miner-game/game.html';
             iframe.frameBorder = 0;
             iframe.allowFullscreen = true;
             iframe.scrolling = 'no';
             iframe.title = 'MiriMiner: Raiders of the Lost Ark by Dor';
             gameContainer.appendChild(iframe);
-            const lang = document.documentElement.lang;
-            toggleLanguage(lang);
-            const footer = document.querySelector('footer');
-            footer.style.textAlign = 'left';
-            footer.style.direction = 'ltr';
         });
 
         document.getElementById('langSwitch').addEventListener('click', () => {
@@ -598,7 +607,6 @@
             // document.getElementById('langSwitch').style.left = newLang === 'he' ? '0' : 'auto';
             // document.getElementById('langSwitch').style.right = newLang === 'he' ? 'auto' : '0';
             // change background color of the button based on the language
-
             toggleLanguage(newLang);
         });
     </script>
