@@ -3,14 +3,14 @@
     data-python=python3.12 data-os=vtx,fs,snd,gui async defer>#<!--
 
 print("""
-Loading miriminer from miriminer.apk
+Loading src from src.apk
     Pygbag Version : 0.9.1
     Template Version : 0.9.0
     Python  : 3.12
     CDN URL : https://pygame-web.github.io/archives/0.9/
     Screen  : 1280x720
-    Title   : miriminer
-    Folder  : miriminer
+    Title   : src
+    Folder  : src
     Authors : pgw
     SPDX-License-Identifier: cookiecutter.spdx
 
@@ -86,12 +86,12 @@ async def custom_site():
 
 
 
-    apk = "miriminer.apk"
+    apk = "src.apk"
 
-    bundle = "miriminer"
+    bundle = "src"
 
     # the C or js loader could do that but be explicit.
-    appdir = Path(f"/data/data/{bundle}") # /data/data/miriminer
+    appdir = Path(f"/data/data/{bundle}") # /data/data/src
     appdir.mkdir()
 
 
@@ -280,7 +280,7 @@ asyncio.run( custom_site() )
             user_canvas_managed: 0,
             ume_block: 1,
             can_close: 0,
-            archive: "miriminer",
+            archive: "src",
             gui_debug: 3,
             cdn: "https://pygame-web.github.io/archives/0.9/",
             autorun: 0,
@@ -289,7 +289,7 @@ asyncio.run( custom_site() )
 
     </script>
 
-    <title>miriminer</title>
+    <title>src</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -325,7 +325,7 @@ asyncio.run( custom_site() )
         }
 
         div.emscripten_border {
-            border: 1px solid black;
+            border: 0px solid black;
         }
 
         div.thick_border {
@@ -349,6 +349,7 @@ asyncio.run( custom_site() )
             bottom: 0;
             left: 0;
             right: 0;
+            outline: none;
         }
 
         body {
@@ -379,14 +380,14 @@ asyncio.run( custom_site() )
         .trinfo {
             position: relative;
             right: 0px;
-            border: 1px solid black;
+            border: 0px solid black;
         }
 
         .framed {
             position: relative;
             top: 150px;
             right: 10px;
-            border: 1px solid black;
+            border: 0px solid black;
         }
     </style>
 
@@ -403,7 +404,7 @@ asyncio.run( custom_site() )
 </div>
 
 
-<canvas class="emscripten" id="canvas" width="1px" height="1px" oncontextmenu="event.preventDefault()" tabindex=1>
+<canvas class="emscripten" id="canvas" width="0px" height="0px" oncontextmenu="event.preventDefault()" tabindex=1>
 </canvas>
 
 <div id=html></div>
@@ -457,7 +458,7 @@ asyncio.run( custom_site() )
 <html lang="en-us">
 
 <head>
-    <title>miriminer</title>
+    <title>src</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

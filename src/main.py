@@ -31,16 +31,16 @@ LIGHT_GREY =  (192, 192, 192)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 WHITE = (255, 255, 255)
-WIDTH, HEIGHT = 900, 600
-FPS = 60
+WIDTH, HEIGHT = 1600, 900
+FPS = 90
 FONT_SIZE = 30
 ROPE_SPEED = 5
 RETURN_SPEED = 10
-MAX_LENGTH = 800
+MAX_LENGTH = 1000
 SWINGING_LENGTH = 100
 MIN_ANGLE = 0
 MAX_ANGLE = 180
-IMAGE_SIZE = 66
+IMAGE_SIZE = 120
 TRANSPARENT_BLACK = (0, 0, 0, 100)
 OPEN_LEFT_CLAW_DIMENSIONS = [(10, 40), (30, 30), (20, 10)]
 OPEN_RIGHT_CLAW_DIMENSIONS = [(50, 40), (30, 30), (40, 10)]
@@ -470,7 +470,7 @@ async def draw_hint(screen, hint_text):
     # Draw the hint text
     screen.blit(hint, hint_rect)
     pygame.display.flip()
-    await asyncio.sleep(5)
+    await asyncio.sleep(2)
 
 class GameState:
     def __init__(self):

@@ -1,0 +1,251 @@
+        :root {
+            --primary-color: #3f2832;
+            --secondary-color: #ffe762;
+            --text-gradient: linear-gradient(to right, red, yellow);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2em;
+        }
+
+        .instructions {
+            background-color: rgba(63, 40, 50, 0.85);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+        .instructions h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .instructions p {
+            margin: 5px 0;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 48%;
+        }
+
+
+        #top-scores h2 {
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        #scores {
+            color: var(--primary-color);
+            border: 2px solid gold;
+            padding: 20px;
+            background-color: #f9f9f9;
+            min-height: 200px;
+        }
+
+        #scores:empty::before {
+            content: 'Loading top scores...';
+            color: var(--primary-color);
+        }
+
+        #top-scores button {
+            background-color: gold;
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        #top-scores button:hover {
+            background-color: white;
+            color: gold;
+            border: 2px solid gold;
+        }
+
+        .bubble {
+            position: fixed;
+            bottom: 0;
+            background-color: gold;
+            border-radius: 50%;
+            animation-name: bubble;
+            animation-timing-function: linear;
+        }
+
+        @keyframes bubble {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        .container iframe,
+        .container {
+            width: calc(100vw - 40px);
+            max-width: 1600px;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .instructions_and_topscores {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .icon-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .langSwitch {
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            font-size: 1.2em;
+            margin: 10px;
+            background-color: var(--primary-color);
+        }
+
+        .langSwitch:hover {
+            background-color: #fcd34d;
+            border-color: #fbbf24;
+        }
+
+
+
+        @media screen and (max-width: 600px) {
+            h1,
+            h2 {
+                font-size: 1.4em;
+            }
+
+            main {
+                margin: 0 20px;
+            }
+
+            #top-scores h2 {
+                font-size: 1em;
+            }
+        }
+
+
+footer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    bottom: 0;
+    position: relative;
+}
+
+h1 {
+    transition: text-shadow 1s ease-out;
+    /* Define a default state for text-shadow that is almost invisible */
+    text-shadow: 0 0 1px var(--secondary-color);
+}
+
+h1:hover {
+    /* Transition to a more pronounced text-shadow on hover */
+    text-shadow: 0 0 3px var(--secondary-color), 0 0 5px var(--secondary-color), 0 0 8px var(--secondary-color), 0 0 12px var(--secondary-color), 0 0 25px var(--secondary-color), 0 0 60px var(--secondary-color), 0 0 30px var(--secondary-color);
+}
+
+/* Apply transitions to elements that might change with page direction */
+body, h1, h2, h3, p, div, main, footer,p {
+    transition: margin 0.5s ease, padding 0.5s ease, text-align 0.5s ease;
+}
+
+/* Example of changing direction */
+/* This CSS rule is for illustration. In practice, the direction change would likely be triggered by a class or attribute selector based on the language. */
+[dir="rtl"] {
+    text-align: right;
+    /* Adjust other properties as needed for RTL layout */
+}
+
+[dir="ltr"] {
+    text-align: left;
+    /* Adjust other properties as needed for LTR layout */
+}
+
+/* Keep the transitions for h1 hover effect as defined previously */
+h1 {
+    transition: text-shadow 1s ease-out;
+    text-shadow: 0 0 1px var(--secondary-color); /* Default state */
+}
+
+h1:hover {
+    text-shadow: 0 0 3px var(--secondary-color), 0 0 5px var(--secondary-color), 0 0 8px var(--secondary-color), 0 0 12px var(--secondary-color), 0 0 25px var(--secondary-color), 0 0 60px var(--secondary-color), 0 0 30px var(--secondary-color); /* Hover state */
+}
+
+/* Adjust the duration of the fade effect to be quicker */
+.fade-effect {
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Reduced from 0.5s to 0.3s for a quicker transition */
+}
+
+footer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    bottom: 0;
+    position: fixed;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px;
+    justify-content: space-between;
+}
+
+footer a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}

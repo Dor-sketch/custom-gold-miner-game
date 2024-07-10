@@ -41,257 +41,7 @@
     <meta name="theme-color" content="#ffe762">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="canonical" href="https://dorpascal.com/custom-gold-miner-game/">
-    <style>
-        :root {
-            --primary-color: #3f2832;
-            --secondary-color: #ffe762;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            width: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Modern, readable font */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            /* Subtle shadow for depth */
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h1 {
-            background: -webkit-linear-gradient(right, red, yellow);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2em;
-            text-align: center;
-        }
-
-        .instructions {
-            background-color: rgba(63, 40, 50, 0.85);
-            padding: 4px;
-            border-radius: 10px;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 600px;
-        }
-
-        .instructions h2 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .instructions p {
-            margin: 5px 0;
-        }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .gallery img {
-            width: 48%;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.9em;
-            position: fixed;
-            /* or 'fixed' depending on the desired behavior */
-            bottom: 0;
-            width: 100%;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            /* Optional: adds shadow at the top */
-            flex-direction: row;
-            display: flex;
-            align-content: center;
-            justify-content: space-between;
-            direction: ltr !important;
-        }
-
-        #top-scores h2 {
-            background: -webkit-linear-gradient(right, red, yellow);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        #scores {
-            color: #3f2832;
-            border: 2px solid gold;
-            padding: 20px;
-            background-color: #f9f9f9;
-            min-height: 200px;
-        }
-
-        #scores:empty::before {
-            content: 'Loading top scores...';
-            color: #3f2832;
-        }
-
-        #top-scores button {
-            background-color: gold;
-            color: #3f2832;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
-
-        #top-scores button:hover {
-            background-color: white;
-            color: gold;
-            border: 2px solid gold;
-        }
-
-        .bubble {
-            position: fixed;
-            bottom: 0;
-            background-color: gold;
-            border-radius: 50%;
-            animation-name: bubble;
-            animation-timing-function: linear;
-        }
-
-        @keyframes bubble {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-100vh);
-            }
-        }
-
-        .container iframe,
-        .container {
-            width: calc(100vw - 40px);
-            max-width: 900px;
-            aspect-ratio: 9 / 6;
-            overflow: hidden;
-            /* This hides the overflow, but might not prevent scrolling within the iframe itself */
-        }
-
-        .instructions_and_topscores {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .icon-link {
-            text-decoration: none;
-            /* Removes the underline from only the specified anchor tags */
-        }
-
-        footer>a {
-            color: var(--primary-color) !important;
-        }
-
-        .langSwitch {
-            border-radius: 5px;
-            /* Rounded corners */
-            cursor: pointer;
-            /* Cursor changes to pointer to indicate it's clickable */
-            display: inline-flex;
-            /* Use flexbox for alignment */
-            align-items: center;
-            /* Center items vertically */
-            justify-content: center;
-            /* Center items horizontally */
-            transition: background-color 0.3s;
-            /* Smooth background color change on hover */
-            font-size: 1.2em;
-            /* Larger text */
-            margin: 10px;
-            background-color: var(--primary-color);
-            /* Dark background color */
-            margin: 0;
-        }
-
-        .langSwitch svg {
-            border-radius: 50%;
-            /* Make the flag circular */
-        }
-
-        .flag-container {
-            display: flex;
-            /* Use flexbox for alignment */
-            align-items: center;
-            /* Center flags vertically */
-        }
-
-
-        /* Specific styles for the flags to ensure they are visible and properly sized */
-        #enFlag,
-        #heFlag {
-            vertical-align: middle;
-            /* Align flags to the middle of the text if any */
-        }
-
-        .langSwitch:hover {
-            background-color: #fcd34d;
-            /* Lighter yellow */
-            border-color: #fbbf24;
-            /* Golden */
-        }
-
-        footer p {
-            display: flex;
-            align-content: center;
-            align-items: center;
-            margin-block-end: 0;
-            margin: 0.1em;
-            margin-bottom: 0;
-        }
-
-        @media screen and (max-width: 600px) {
-
-            h1,
-            h2 {
-                font-size: 1.4em;
-            }
-
-            main {
-                margin-left: 40px;
-                margin-right: 40px;
-            }
-
-            #top-scores h2 {
-                font-size: 1em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -398,9 +148,8 @@
         <h1 id="gameTitle">מירי מיינר ושודדי התיבה האבודה</h1>
     </header>
     <main>
-        <div class="container" id="gameContainer">
-        </div>
         <div class="instructions_and_topscores">
+        <div class="container" id="gameContainer"></div>
             <div class="instructions">
                 <p id="gameDescription">מימוש של המשחק הקלאסי כורה הזהב באמצעות Python ו-Pygame.</p>
                 <p id="featuresIntro">התכונות כוללות:</p>
@@ -422,23 +171,11 @@
                 <button onclick="createGoldBubble()">Reload</button>
             </div>
         </div>
-        <div class="gallery">
-            <details>
-                <summary>Click to view screenshots</summary>
-                <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAzNi5wbmc=/original/y4VS5r.png"
-                    alt="Screenshot 1" loading="lazy">
-                <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAyNS5wbmc=/original/%2BgIWyj.png"
-                    alt="Screenshot 2" loading="lazy">
-                <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTAxOC5wbmc=/original/QE25Tg.png"
-                    alt="Screenshot 3" loading="lazy">
-                <img src="https://img.itch.zone/aW1hZ2UvMjc1OTE3NS8xNjUyNTA2Mi5wbmc=/original/7Zf0UF.png"
-                    alt="Screenshot 4" loading="lazy">
-            </details>
     </main>
     <footer>
         <p>
             <a href="https://www.github.com/Dor-sketch/custom-gold-miner-game" aria-label="Dor Pascal on GitHub"
-                style="color: var(--primary-color) !important; text-decoration: none;">
+                style="text-decoration: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" width="24" height="24" aria-hidden="true"
                     focusable="false" class="fab fa-github">
                     <path
@@ -447,7 +184,7 @@
                 </svg>
             </a>
             <a href="https://www.linkedin.com/in/dor-pascal/" aria-label="Dor Pascal on LinkedIn"
-                style="color: var(--primary-color) !important; text-decoration: none;">
+                style="text-decoration: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" aria-hidden="true"
                     focusable="false" class="fab fa-linkedin">
                     <path
@@ -456,7 +193,7 @@
                 </svg>
             </a>
             <a href="https://dor-sketch.itch.io/miriminer" aria-label="Dor Pascal's Games on Itch.io"
-                style="color: var(--primary-color) !important; text-decoration: none;">
+                style="text-decoration: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" aria-hidden="true"
                     focusable="false" class="fas fa-gamepad">
                     <path
@@ -464,7 +201,7 @@
                     </path>
                 </svg>
             </a>
-            <a style="color: var(--primary-color) !important;" href="https://dorpascal.com">Dor Pascal</a> | MIT License
+            <a  href="https://dorpascal.com">Dor Pascal</a> | MIT License
         </p>
         <button class="langSwitch" id="langSwitch" aria-label="Switch Language">
             <div class="flag-container">
@@ -623,22 +360,39 @@
             }
         };
 
-        function toggleLanguage(lang) {
-            for (const id in langData) {
-                if (langData.hasOwnProperty(id)) {
-                    const element = document.getElementById(id);
-                    if (element) {
-                        element.innerText = langData[id][lang];
-                    }
+function toggleLanguage(lang) {
+    const body = document.body;
+    const newDir = lang === 'he' ? 'rtl' : 'ltr'; // Define newDir based on lang
+
+    // Fade out
+    body.classList.add('fade-effect');
+
+    // Wait for the fade-out to complete, duration reduced to match CSS
+    setTimeout(() => {
+        // Change the direction
+        body.setAttribute('dir', newDir);
+        document.dir = newDir; // Ensure the document's dir attribute is updated
+
+        // Update text for all elements based on langData
+        for (const id in langData) {
+            if (langData.hasOwnProperty(id)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerText = langData[id][lang];
                 }
             }
-            document.dir = lang === 'he' ? 'rtl' : 'ltr';
         }
+        
+        // Immediately start fading in by removing the fade-effect class
+        body.classList.remove('fade-effect');
+    }, 300); // Reduced to match the new, quicker transition duration
+
+}
 
         document.addEventListener('DOMContentLoaded', () => {
             const gameContainer = document.getElementById('gameContainer');
             const iframe = document.createElement('iframe');
-            iframe.src = 'https://dorpascal.com/custom-gold-miner-game/game.html';
+            iframe.src = './game.html';
             iframe.frameBorder = 0;
             iframe.allowFullscreen = true;
             iframe.scrolling = 'no';
